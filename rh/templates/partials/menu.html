@@ -1,0 +1,22 @@
+{% include "partials/base.html" %}
+<nav>
+    <li>
+        <a href="{% url "home" %}">Home</a>
+    </li>
+    <li>
+        <a href="{% url "funcionario" %}">Funcionários</a>
+    </li>
+    <li>
+        <a href="{% url "cargo" %}">Cargos</a>
+    </li>
+    <li>
+        <a href="{% url "recrutamento" %}">Recrutamento</a>
+    </li>
+    
+    <li>
+        <a href="{% url "cadcargo" %}">Cadastrar Cargos</a>
+    </li>
+    <li>
+        <a href="{% url "cadfuncionario" %}">Cadastrar funcionario</a>
+    </li>
+</nav>
