@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'pages/login.html'
+LOGIN_REDIRECT_URL = 'pages/home.html'
 
 # Application definition
 

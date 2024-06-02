@@ -1,0 +1,28 @@
+{% include "partials/base.html" %}
+{% include "partials/logo.html" %}
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<style>
+    body{
+        background-color: #b8b8b8;
+    }
+</style>
+<form method="post" class="form_login">
+    <div class="login">
+        <div class="div_label_login"><label for="">LOGIN</label></div>
+        <div class="container_formLogin">
+            <b><label for="usuario">Usuário: </label></b>
+            <input type="text" id="input_usuario">
+            <br>
+            <b><label for="usuario">Senha: </label></b>
+            <input type="text" id="input_senha">
+        </div>
+        <div class="btn_login">
+            <button type="submit">Entrar</button>
+        </div>
+    </div>
+</form>
+{% if form.errors %}
+    <p>Invalid login credentials</p>
+{% endif %}
