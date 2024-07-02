@@ -21,9 +21,9 @@ from rh import views as view_rh
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',view_rh.home, name='home'),
+    path('',view_rh.login, name='login'),
+    path('login/',view_rh.login, name='login'),
     path('home/',view_rh.home, name='home'),
-    path('login/',auth_views.LoginView.as_view(template_name='pages/login.html')),
     path('funcionario/', view_rh.funcionario, name='funcionario'),
     path('cargo/', view_rh.cargo, name='cargo'),
     path('recrutamento/', view_rh.recrutamento, name='recrutamento'),

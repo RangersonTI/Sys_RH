@@ -8,7 +8,8 @@
         background-color: #b8b8b8;
     }
 </style>
-<form method="post" class="form_login">
+<form method="POST" class="form_login">
+    {% csrf_token %}
     <div class="login">
         <div class="div_label_login"><label for="">LOGIN</label></div>
         <div class="container_formLogin">
@@ -19,7 +20,7 @@
             <input type="text" id="input_senha">
         </div>
         <div class="btn_login">
-            <button type="submit">Entrar</button>
+            <input type="submit" id="login" title="Entrar">
         </div>
     </div>
 </form>

@@ -132,7 +132,7 @@ nav ul li a {
         justify-items: left;
         padding: 12px;
     }
-    .btn_login button{
+    .btn_login input{
         width: 100px;
         font-size: 1rem;
         font-weight: 800;
