@@ -80,4 +80,4 @@ def cadcargo(request):
     var = {
         'titulo_pag': 'Cadastro Funcionario'
     }
-    return render(request, 'pages/cadastro/funcionario.html', var)
+    return render(request, 'pages/cadastro/cargo.html', var)
