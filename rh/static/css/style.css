@@ -98,6 +98,37 @@ nav ul li a {
       background: #fff
   }
 
+.button_novofuncionario {
+    left: 0;
+    right: 0;
+    padding-top: 120px;
+    padding-right: 120px;
+    display: flex;
+    justify-content:end;
+}
+
+    .novo_funcionario a {
+        color: rgb(0, 0, 0);
+        font-style: normal;
+        text-decoration: none;
+    }
+    .novo_funcionario{
+        border-color: #2c2c2c;
+        background-color: rgb(152, 115, 187);
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        height: 40px;
+        width: 250px;
+    }
+        .novo_funcionario:hover{
+            background-color: rgb(126, 81, 168);
+            color: #ffffff;
+        }
+    
+
   /* pages/login.html */
 
   .form_login{
@@ -142,7 +173,7 @@ nav ul li a {
         box-shadow: 0px 0px 20%;
         cursor: pointer;
     }
-    .btn_login button:hover{
+    .btn_login input:hover{
         background-color: #f3d9ff;
         box-shadow: 0px 0px 5px;
     }

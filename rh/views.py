@@ -4,24 +4,29 @@ from django.urls import path
 
 # Create your views here.
 funcionario_logado = False
+usuario_p = 'admin'
+senha_p = 'admin'
+
+def validar_login():
+    if funcionario_logado is False:
+        print(f"Usuario logado: \n{funcionario_logado}\n")
+        #var = {
+        #'titulo_pag': 'Login'
+        #}
+        return redirect('login')
 
 def home(request):
 
-    #if funcionario_logado is False:
-    #    var = {
-    #    'titulo_pag': 'Login'
-    #    }
-    #    return render(request, 'pages/login.html', var)
-        
+    validar_login()
     var = {
         'titulo_pag': 'Home'
     }    
     return render(request, 'pages/home.html', var)
-
 def login(request):
-    usuario_p = 'admin'
-    senha_p = 'admin'
-
+    var = {
+        'titulo_pag': 'Login'
+    }
+    
     usuario = request.POST.get('input_usuario')
     senha = request.POST.get('input_senha')
 
@@ -37,13 +42,11 @@ def login(request):
         funcionario_logado = True
         return redirect('home')
 
-    var = {
-        'titulo_pag': 'Login'
-    }
     return render(request, 'pages/login.html', var)
 
 def funcionario(request):
 
+    validar_login()
     var = {
         'titulo_pag': 'Visualização Funcionario'
     }
@@ -51,6 +54,7 @@ def funcionario(request):
 
 def cargo(request):
 
+    validar_login()
     var = {
         'titulo_pag': 'Visualização Cargos'
     }
@@ -72,6 +76,7 @@ def cadfuncionario(request):
 
 def cadcargo(request):
 
+    validar_login()
     var = {
         'titulo_pag': 'Cadastro Funcionario'
     }
