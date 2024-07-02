@@ -77,11 +77,11 @@ nav ul li a {
     padding: 20px;
     font-weight: bolder ;
   }
-  
+
   thead{
     background-color: rgb(180, 161, 197);
   }
-  
+
   th, td {
     border: 1px solid rgb(128, 128, 128);
     padding: 8px 10px;
@@ -101,10 +101,9 @@ nav ul li a {
 .button_novofuncionario {
     left: 0;
     right: 0;
-    padding-top: 120px;
-    padding-right: 120px;
+    padding: 120px;
     display: flex;
-    justify-content:end;
+    justify-content:center;
 }
 
     .novo_funcionario a {
@@ -126,8 +125,9 @@ nav ul li a {
         .novo_funcionario:hover{
             background-color: rgb(126, 81, 168);
             color: #ffffff;
+            cursor: pointer;
         }
-    
+
 
   /* pages/login.html */
 
@@ -177,3 +177,32 @@ nav ul li a {
         background-color: #f3d9ff;
         box-shadow: 0px 0px 5px;
     }
+
+/* pages/cadastro/funcionario.html */
+    .form_container{
+        margin: 0;
+        padding: 20px;
+        justify-content: center;
+    }
+        .form_container form{
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 200px 1fr; /* Colunas: 150px para labels, restante para inputs/selects */
+            gap: 10px 20px; /* Espaçamento entre linhas e colunas */
+            align-items: center; /* Alinha os itens ao centro verticalmente */
+            background-color: #524d4d;
+            width: 600px;
+            font-family: 'Tahoma';
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .form_container label{
+            font-weight: bold;
+            justify-self: end;
+        }
+        .form_container input, select{
+            width: auto;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
