@@ -1,5 +1,36 @@
 {% include "partials/menu.html" %}
 
-<h1>
+<h1 style="color: #fff; font-weight:bold">
     <center>Cargo</center>
 </h1>
+<table class="listagem_tabela">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Salário Base</th>
+            <th scope="col">Requisito de Formação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"> 1 </th>
+            <th> Suporte </th>
+            <th> Suporte e treinamento do uso de software ao cliente </th>
+            <th> TI </th>
+            <th>R$ 2.500</th>
+        </tr>
+        <tr>
+            <th scope="row"> 2 </th>
+            <th> Limpeza </th>
+            <th> Resposável pela limpeza da empresa </th>
+            <th> Limpeza </th>
+            <th>R$ 1.500</th>
+        </tr>
+    </tbody>
+</table>
+<div class="button_novocargo">
+    <a href="{% url "cadcargo" %}"><button class="novo_cargo">Cadastrar Cargo</button></a>
+</div>

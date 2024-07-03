@@ -1,0 +1,30 @@
+{% include "partials/menu.html" %}
+
+<div class="form_container">
+    <h1 style="color: #fff; font-weight:bold">
+        <center>Cadastro de Cargo</center>
+    </h1>
+    <form method="post">
+        {% csrf_token %}
+    <form method="post">
+        <label for="nome_cargo">Cargo:</label>
+        <input type="text" name="nome_cargo" id="nome_cargo">
+        <label for="descricao">Descrição:</label>
+        <input type="text" name="descricao" id="descricao">
+        <label for="departamento">Departamento</label>
+        <select name="departamento" id="departamento">
+            <option value="ti">TI</option>
+            <option value="limpeza">Limpeza</option>
+            <option value="financeira">Financeiro</option>
+            <option value="administrativo">Administrativo</option>
+            <option value="recursos_humanos">Recursos Humanos (RH)</option>
+            <option value="market">Market</option>
+        </select>
+        <label for="salario_base">Salário base:</label>
+        <input type="number" name="salario_base" id="salario_base">
+        <label for="requistos_formacao">Requisitos de formação:</label>
+        <input type="text" name="requistos_formacao" id="requistos_formacao">
+        <br><br>
+        <input id="input_cad_cargo" type="submit" value="Enviar">
+    </form>
+</div>

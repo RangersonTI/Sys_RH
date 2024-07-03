@@ -33,14 +33,14 @@ def login(request):
 
     return render(request, 'pages/login.html', var)
 
-@login_required
+#@login_required
 def funcionario(request):
     var = {
         'titulo_pag': 'Visualização Funcionario'
     }
     return render(request, 'pages/funcionario.html', var)
 
-@login_required
+#@login_required
 def cargo(request):
     var = {
         'titulo_pag': 'Visualização Cargos'
@@ -53,14 +53,14 @@ def recrutamento(request):
     }
     return render(request, 'pages/recrutamento.html')
 
-@login_required
+#@login_required
 def cadfuncionario(request):
     var = {
         'titulo_pag': 'Cadastro Funcionario'
     }
     return render(request, 'pages/cadastro/funcionario.html', var)
 
-@login_required
+#@login_required
 def cadcargo(request):
     var = {
         'titulo_pag': 'Cadastro Funcionario'

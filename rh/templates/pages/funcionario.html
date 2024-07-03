@@ -1,10 +1,10 @@
 {% include "partials/menu.html" %}
 
-<h1>
+<h1 style="color: #fff; font-weight:bold">
     <center>Funcionário</center>
     <br><br>
 </h1>
-<table class="listar_funcionario">
+<table class="listagem_tabela">
     <thead>
         <tr>
             <th scope="col">ID</th>
@@ -13,10 +13,7 @@
             <th scope="col">Data de Nascimento</th>
             <th scope="col">CPF</th>
             <th scope="col">Estado Civil</th>
-            <th scope="col">Possui CNH?</th>
             <th scope="col">Categoria (CNH)</th>
-            <th scope="col">Admissão</th>
-            <th scope="col">Desligamento</th>
         </tr>
     </thead>
     <tbody>
@@ -44,5 +41,5 @@
     </tbody>
 </table>
 <div class="button_novofuncionario">
-    <a href="{% url "cadfuncionario" %}"><button class="novo_funcionario">Cadastrar funcionario</button></a>
+    <a href="{% url "cadfuncionario" %}"><button class="novo_funcionario">Cadastrar funcionário</button></a>
 </div>
