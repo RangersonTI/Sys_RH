@@ -6,6 +6,9 @@
         <br><br>
     </h1>
 
+  
+    <form method="post">
+        {% csrf_token %}
     <form method="post">
         <label for="nome_completo">Nome Completo:</label>
         <input type="text" name="nome_completo" id="nome_completo">
@@ -34,7 +37,8 @@
             <option value="a_c">A e C</option>
             <option value="a_d">A e D</option>
             <option value="a_e">A e E</option>
-            </select>
-        </div>
+        </select>
+        <br><br>
+        <button type="submit">Enviar</button>
     </form>
 </div>
