@@ -24,9 +24,12 @@ urlpatterns = [
     path('',view_rh.login, name='login'),
     path('login/',view_rh.login, name='login'),
     path('home/',view_rh.home, name='home'),
-    path('funcionario/', view_rh.funcionario, name='funcionario'),
-    path('cargo/', view_rh.cargo, name='cargo'),
+    path('funcionarios/', view_rh.funcionario, name='funcionario'),
+    path('cargos/', view_rh.cargo, name='cargo'),
     path('recrutamento/', view_rh.recrutamento, name='recrutamento'),
-    path('cad_funcionario/', view_rh.cadfuncionario, name='cadfuncionario'),
+    path('candidatos/', view_rh.candidatos,name='candidatos'),
     path('cad_cargo/', view_rh.cadcargo, name='cadcargo'),
+    path('cad_candidato/',view_rh.cadcandidato,name='cadcandidato'),
+    path('cad_funcionario/', view_rh.cadfuncionario, name='cadfuncionario'),
+    path('cad_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento')
 ]
