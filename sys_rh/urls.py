@@ -31,5 +31,9 @@ urlpatterns = [
     path('cad_cargo/', view_rh.cadcargo, name='cadcargo'),
     path('cad_candidato/',view_rh.cadcandidato,name='cadcandidato'),
     path('cad_funcionario/', view_rh.cadfuncionario, name='cadfuncionario'),
-    path('cad_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento')
+    path('cad_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento'),
+    path('edit_cargo/', view_rh.cadcargo, name='cadcargo'),
+    path('edit_candidato/<str:usuario_nome>',view_rh.editcandidato,name='editcandidato'),
+    path('edit_funcionario/', view_rh.cadfuncionario, name='cadfuncionario'),
+    path('edit_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento')
 ]

@@ -1,6 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import path, reverse_lazy
+from django.views.generic.edit import UpdateView
+from .models import Candidato, Funcionario, Cargos, Recrutamento
+from .forms import EditarCandidato
 
 # Create your views here.
 usuario_p = 'admin'
@@ -61,7 +64,15 @@ def recrutamento(request):
 #@login_required
 def candidatos(request):
     
-    return render(request, 'pages/candidato.html')
+    candidatos = Candidato.objects.all()
+    print(candidatos)
+    
+    context = {
+        'title' : 'Visualizar Candidatos',
+        'candidatos' : candidatos
+    }
+    
+    return render(request, 'pages/candidato.html', context)
 
 
 # VIEWS PARA CADASTROS
@@ -99,3 +110,29 @@ def cadcandidato(request):
     }
 
     return render(request, 'pages/cadastro/candidato.html', context)
+
+
+# VIEWS PARA EDIÇÃO
+
+#class CandidatoUpdate(UpdateView):
+#    model = Candidato
+#    form_class = EditarCandidato
+#    template_name = 'pages/cadastro/candidato.html'
+#    success_url = reverse_lazy(candidatos)
+
+def editcandidato(request, usuario_nome):
+
+    candidato = get_object_or_404(Candidato, nome_completo=usuario_nome)
+    form = EditarCandidato(instance=candidato)
+    
+    context = {
+        'descricao' : 'Editar Candidato',
+        'title' : 'Editar Candidato',
+        'form' : form,
+        'candidato' : candidato
+    }
+    
+    if request.method == 'POST':
+        return False
+    else:
+        return render(request, 'pages/editar/candidato.html')

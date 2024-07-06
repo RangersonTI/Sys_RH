@@ -286,7 +286,41 @@ nav ul li a {
             cursor: pointer;
         }
 
-  /* pages/login.html */
+/* pages/candidato.html */ 
+
+.button_novo_candidato{
+    left: 0;
+    right: 0;
+    padding: 120px;
+    display: flex;
+    justify-content:center;
+}
+
+    .novo_candidato{
+        border-color: #2c2c2c;
+        background-color: rgb(152, 115, 187);
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px;
+        font-family: "Kanit", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 20px;
+        height: 40px;
+        width: 250px;
+    }
+    .novo_candidato a {
+        color: rgb(0, 0, 0);
+        font-style: normal;
+        text-decoration: none;
+    }
+        .novo_candidato:hover{
+            background-color: rgb(126, 81, 168);
+            color: #ffffff;
+            cursor: pointer;
+        }
+        
+
+/* pages/login.html */
 
   .form_login{
     top: 10;

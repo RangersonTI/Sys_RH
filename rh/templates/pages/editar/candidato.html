@@ -1,0 +1,18 @@
+{% include "partials/menu.html" %}
+
+<div class="form_container">
+    <center>
+        <h1>
+            Editar Candidato ({{ candidato.nome_completo}})
+            <br><br>
+        </h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="input_cad_candidato" type="submit">Enviar</button>
+        </form>
+    </center>
+</div>
+
+{% include "partials/final.html" %}

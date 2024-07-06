@@ -28,9 +28,11 @@ class Candidato(models.Model):
     nome_completo = models.CharField(max_length=100)
     data_nascimento = models.DateField()
     contato = models.CharField(max_length=100)
-    endereco_numero = models.CharField(max_length=100)
-    endereco_estado = models.CharField(max_length=100)
-    endereco_cep = models.CharField(max_length=100)
+    endereco_rua = models.CharField(max_length=100)
+    endereco_numero = models.CharField(max_length=5)
+    endereco_cidade = models.CharField(max_length=50)
+    endereco_estado = models.CharField(max_length=3)
+    endereco_cep = models.CharField(max_length=10)
 
 
     def __str__(self):
