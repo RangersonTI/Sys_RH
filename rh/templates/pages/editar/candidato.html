@@ -3,13 +3,32 @@
 <div class="form_container">
     <center>
         <h1>
-            Editar Candidato ({{ candidato.nome_completo}})
+            Editar Candidato ({{ candidato.id}})
             <br><br>
         </h1>
 
-        <form method="post">
+        <form method="POST" name="form_candidato">
             {% csrf_token %}
-            {{ form.as_p }}
+            <label for="nome_completo">Nome Completo:</label>
+            <input type="text" name="nome_completo" id="nome_completo" value="{{ candidato.nome_completo }}"/>
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="date" name="data_nascimento" id="data_nascimento" value="{{ candidato.data_nascimento }}"/>
+            <label for="contato">Contato:</label>
+            <input type="text" name="contato" id="contato" value="{{ candidato.contato }}"/>
+            <label>Endereço:</label><label></label>
+            <label for="endereco_rua">Rua:</label>
+            <input type="text" name="endereco_rua" id="endereco_rua" value="{{ candidato.endereco_rua }}"/>
+            <label for="endereco_numero">Numero:</label>
+            <input type="text" name="endereco_numero" id="endereco_numero" value="{{ candidato.endereco_numero }}"/>
+            <label for="endereco_cidade">Cidade:</label>
+            <input type="text" name="endereco_cidade" id="endereco_cidade" value="{{ candidato.endereco_cidade }}"/>
+            <label for="endereco_estado">Estado:</label>
+            <select name="endereco_estado" id="endereco_estado" aria-placeholder="selecione uma opção" required>
+                {% for uf in ufs %}
+                    <option value="{{ uf }}">{{ uf }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
             <button id="input_cad_candidato" type="submit">Enviar</button>
         </form>
     </center>

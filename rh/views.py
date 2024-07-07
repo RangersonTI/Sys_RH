@@ -4,11 +4,20 @@ from django.urls import path, reverse_lazy
 from django.views.generic.edit import UpdateView
 from .models import Candidato, Funcionario, Cargos, Recrutamento
 from .forms import EditarCandidato
+from django.http import HttpResponseRedirect
+from datetime import datetime
 
 # Create your views here.
 usuario_p = 'admin'
 senha_p = 'admin'
 
+# OUTRAS FUNÇÕES
+
+def ufs():
+    return ['','AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']
+
+def categoriasCNH():
+    return ['Não há','A','B','C','D','E','A e B','A e C','A e D','A e E']
 
 # VIEWS DE LISTAGEM / LOGIN / HOME
 
@@ -46,20 +55,20 @@ def funcionario(request):
     var = {
         'titulo_pag': 'Visualização Funcionario'
     }
-    return render(request, 'pages/funcionario.html', var)
+    return render(request, 'pages/listar/funcionario.html', var)
 
 #@login_required
 def cargo(request):
     var = {
         'titulo_pag': 'Visualização Cargos'
     }
-    return render(request, 'pages/cargo.html', var)
+    return render(request, 'pages/listar/cargo.html', var)
 
 def recrutamento(request):
     var = {
         'titulo_pag': 'Recrutamento'
     }
-    return render(request, 'pages/recrutamento.html')
+    return render(request, 'pages/listar/recrutamento.html')
 
 #@login_required
 def candidatos(request):
@@ -72,7 +81,7 @@ def candidatos(request):
         'candidatos' : candidatos
     }
     
-    return render(request, 'pages/candidato.html', context)
+    return render(request, 'pages/listar/candidato.html', context)
 
 
 # VIEWS PARA CADASTROS
@@ -81,7 +90,7 @@ def candidatos(request):
 def cadfuncionario(request):
     
     estado_civil = ['Solteiro(a)','Casado(a)','Divorciado(a)','Viuvo(a)']
-    categorias_cnh = ['Não há','A','B','C','D','E','A e B','A e C','A e D','A e E']
+    categorias_cnh = categoriasCNH()
 
     var = {
         'titulo_pag': 'Cadastro Funcionario',
@@ -102,7 +111,7 @@ def cadrecrutamento(request):
 
 def cadcandidato(request):
     
-    list_uf = ['selecione uma opcao','AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']
+    list_uf = ufs()
     
     context = {
         'title' : 'Cadastro de Candidato',
@@ -114,25 +123,46 @@ def cadcandidato(request):
 
 # VIEWS PARA EDIÇÃO
 
-#class CandidatoUpdate(UpdateView):
-#    model = Candidato
-#    form_class = EditarCandidato
-#    template_name = 'pages/cadastro/candidato.html'
-#    success_url = reverse_lazy(candidatos)
 
-def editcandidato(request, usuario_nome):
+def editcandidato(request, id_usuario):
+    print("\n\n"+request.method+"\n\n")
 
-    candidato = get_object_or_404(Candidato, nome_completo=usuario_nome)
-    form = EditarCandidato(instance=candidato)
-    
+    candidatos = Candidato.objects.get(pk=id_usuario)
+    candidatos.data_nascimento = datetime.strftime(candidatos.data_nascimento, '%Y-%m-%d')
+    form = EditarCandidato(request.POST, instance=candidatos)
+    lista_uf = ufs()
+
     context = {
-        'descricao' : 'Editar Candidato',
-        'title' : 'Editar Candidato',
-        'form' : form,
-        'candidato' : candidato
+        'candidato' : candidatos,
+        'ufs' : lista_uf,
+        'form' : form
     }
-    
-    if request.method == 'POST':
-        return False
+
+    if form.is_valid():
+        print("\n\nSalvo Savo Salvo\n\n")
+        form.save()
+        return HttpResponseRedirect('/candidatos')
     else:
-        return render(request, 'pages/editar/candidato.html')
+        print(form.errors)  
+
+    return render(request, 'pages/editar/candidato.html', context)
+
+
+
+
+    #if request.method == 'GET':
+    #    
+    #
+    #if request.method == 'POST':
+#
+#
+    #    if form.is_valid():
+    #        candidato = Candidato.objects.get(pk=id_usuario)
+    #        candidato.nome_completo = form.cleaned_data['nome_completo']
+    #        candidato.data_nascimento = form.cleaned_data['data_nascimento']
+    #        candidato.contato = form.cleaned_data['contato']
+    #        candidato.endereco_rua = form.cleaned_data['endereco_rua']
+    #        candidato.endereco_numero = form.cleaned_data['endereco_numero']
+    #        candidato.endereco_cidade = form.cleaned_data['endereco_cidade']
+    #        candidato.endereco_estado = form.cleaned_data['endereco_estado']
+    #        candidato.save()

@@ -20,6 +20,7 @@ from django.urls import path
 from rh import views as view_rh
 
 urlpatterns = [
+    # PATH DE LISTAGEM
     path('admin/', admin.site.urls),
     path('',view_rh.login, name='login'),
     path('login/',view_rh.login, name='login'),
@@ -28,12 +29,16 @@ urlpatterns = [
     path('cargos/', view_rh.cargo, name='cargo'),
     path('recrutamento/', view_rh.recrutamento, name='recrutamento'),
     path('candidatos/', view_rh.candidatos,name='candidatos'),
+    
+    # PATH DE CADASTROS
     path('cad_cargo/', view_rh.cadcargo, name='cadcargo'),
     path('cad_candidato/',view_rh.cadcandidato,name='cadcandidato'),
     path('cad_funcionario/', view_rh.cadfuncionario, name='cadfuncionario'),
     path('cad_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento'),
-    path('edit_cargo/', view_rh.cadcargo, name='cadcargo'),
-    path('edit_candidato/<str:usuario_nome>',view_rh.editcandidato,name='editcandidato'),
-    path('edit_funcionario/', view_rh.cadfuncionario, name='cadfuncionario'),
-    path('edit_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento')
+
+    # PATH DE EDIÇÃO
+    path('edit_cargo/', view_rh.cadcargo, name='editcargo'),
+    path('edit_candidato/<int:id_usuario>',view_rh.editcandidato,name='editcandidato'),
+    path('edit_funcionario/', view_rh.cadfuncionario, name='editfuncionario'),
+    path('edit_recrutamento/',view_rh.cadrecrutamento,name='editrecrutamento')
 ]
