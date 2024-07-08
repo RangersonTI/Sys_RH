@@ -3,27 +3,27 @@
 <div class="form_container">
     <center>
         <h1>
-            Editar Candidato ({{ candidato.id}})
+            {{ title }}({{ candidato.id}})
             <br><br>
         </h1>
 
         <form method="POST" name="form_candidato">
             {% csrf_token %}
             <label for="nome_completo">Nome Completo:</label>
-            <input type="text" name="nome_completo" id="nome_completo" value="{{ candidato.nome_completo }}"/>
+            <input type="text" name="nome_completo" id="nome_completo" value="{{ candidato.nome_completo }}" requerid/>
             <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="date" name="data_nascimento" id="data_nascimento" value="{{ candidato.data_nascimento }}"/>
+            <input type="date" name="data_nascimento" id="data_nascimento" value="{{ candidato.data_nascimento }}" requerid/>
             <label for="contato">Contato:</label>
-            <input type="text" name="contato" id="contato" value="{{ candidato.contato }}"/>
+            <input type="text" name="contato" id="contato" value="{{ candidato.contato }}" requerid/>
             <label>Endereço:</label><label></label>
             <label for="endereco_rua">Rua:</label>
-            <input type="text" name="endereco_rua" id="endereco_rua" value="{{ candidato.endereco_rua }}"/>
+            <input type="text" name="endereco_rua" id="endereco_rua" value="{{ candidato.endereco_rua }}" requerid/>
             <label for="endereco_numero">Numero:</label>
-            <input type="text" name="endereco_numero" id="endereco_numero" value="{{ candidato.endereco_numero }}"/>
+            <input type="text" name="endereco_numero" id="endereco_numero" value="{{ candidato.endereco_numero }}" requerid/>
             <label for="endereco_cidade">Cidade:</label>
-            <input type="text" name="endereco_cidade" id="endereco_cidade" value="{{ candidato.endereco_cidade }}"/>
+            <input type="text" name="endereco_cidade" id="endereco_cidade" value="{{ candidato.endereco_cidade }}" requerid/>
             <label for="endereco_estado">Estado:</label>
-            <select name="endereco_estado" id="endereco_estado" aria-placeholder="selecione uma opção" required>
+            <select name="endereco_estado" id="endereco_estado" required>
                 {% for uf in ufs %}
                     <option value="{{ uf }}">{{ uf }}</option>
                 {% endfor %}

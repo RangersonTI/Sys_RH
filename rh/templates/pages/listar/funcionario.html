@@ -1,3 +1,4 @@
+{% load static %}
 {% include "partials/menu.html" %}
 
 <h1 style="color: #fff; font-weight:bold">
@@ -18,11 +19,19 @@
     </thead>
     <tbody>
         <tr>
-            <th scope="row"> 1 </th>
-            <th> Leticia </th>
-            <th> 20 </th>
-            <th> 26/05/2004 </th>
-            <th>154.695.845-20</th>
+            {% for funcionario in funcionarios %}{% endfor %}
+            <th scope="row"> {{funcionario.id}}</th>
+            <th> {{ funcionario.nome_completo }} </th>
+            <th> {{ funcionario.idade}} </th>
+            <th> {{ funcionario.data_nascimento }} </th>
+            <th> {{ funcionario.cpf }}</th>
+            <th> {{ funcionario.estado_civil }}</th>
+            <th> {{ funcionario.categoria }}</th>
+            <th>
+                <center>
+                    <a href="{% url "editfuncionario" funcionario.id %}"><img src="{% static "img/editar.png" %}"/></a>
+                </center>
+            </th>
         </tr>
         <tr>
             <th scope="row"> 2 </th>

@@ -1,0 +1,38 @@
+{% include "partials/menu.html" %}
+
+<div class="form_container">
+    <center>
+        <h1>
+            {{ title }} {{ funcionario.id}}
+            <br><br>
+        </h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="nome_completo">Nome Completo:</label>
+            <input type="text" name="nome_completo" id="nome_completo" value="{{ funcionario.nome_completo }}">
+            <label for="idade">Idade:</label>
+            <input type="number" name="idade" id="idade" value="{{ funcionario.idade }}">
+            <label for="data_nascimeto">Data de Nascimento:</label>
+            <input type="date" name="data_nascimeto" id="data_nascimeto" value="{{ funcionario.data_nascimento }}">
+            <label for="cpf">Numero CPF:</label>
+            <input type="text" name="cpf" id="cpf" value="{{ funcionario.cpf}}">
+            <label for="estado_civil">Estado Civil:</label>
+            <select name="estado_civil" id="estado_civil">
+                {% for estado_civil in estados_civis %}
+                    <option value="{{ estado_civil }}">{{ estado_civil }}</option>
+                {% endfor %}
+            </select>
+            <label for="categoria_cnh">CNH:</label>
+            <select name="categoria_cnh" id="categoria_cnh">
+                {% for categoria in categoria_cnh %}
+                    <option value="{{ categoria}}">{{categoria}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <button id="input_cad_funcionario" type="submit">Enviar</button>
+        </form>
+    </center>
+</div>
+
+{% include "partials/final.html" %}

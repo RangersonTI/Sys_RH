@@ -37,8 +37,8 @@ urlpatterns = [
     path('cad_recrutamento/',view_rh.cadrecrutamento,name='cadrecrutamento'),
 
     # PATH DE EDIÇÃO
-    path('edit_cargo/', view_rh.cadcargo, name='editcargo'),
-    path('edit_candidato/<int:id_usuario>',view_rh.editcandidato,name='editcandidato'),
-    path('edit_funcionario/', view_rh.cadfuncionario, name='editfuncionario'),
+    path('edit_cargo/<int:id_cargo>', view_rh.editcargo, name='editcargo'),
+    path('edit_candidato/<int:id_candidato>',view_rh.editcandidato,name='editcandidato'),
+    path('edit_funcionario/<int:id_funcionario>', view_rh.editfuncionario, name='editfuncionario'),
     path('edit_recrutamento/',view_rh.cadrecrutamento,name='editrecrutamento')
 ]

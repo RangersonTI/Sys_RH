@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, reverse_lazy
 from django.views.generic.edit import UpdateView
 from .models import Candidato, Funcionario, Cargos, Recrutamento
-from .forms import EditarCandidato
+from .forms import EditarCandidato, EditarCargo, EditarRecrutamento, EditarFuncionario
 from django.http import HttpResponseRedirect
 from datetime import datetime
 
@@ -19,6 +19,11 @@ def ufs():
 def categoriasCNH():
     return ['Não há','A','B','C','D','E','A e B','A e C','A e D','A e E']
 
+def departamentos():
+    return ['','TI','Administrativo','Recursos Humanos (RH)','Market','Financeiro']
+
+def estado_civil():
+    return ['Solteiro(a)','Casado(a)','Divorciado(a)','Viuvo(a)']
 # VIEWS DE LISTAGEM / LOGIN / HOME
 
 def home(request):
@@ -52,17 +57,27 @@ def login(request):
 
 
 def funcionario(request):
-    var = {
-        'titulo_pag': 'Visualização Funcionario'
+
+    funcionarios = Funcionario.objects.all()
+    print(f"\n\n{funcionarios}\n\n")
+
+    context = {
+        'title': 'Vizualizar Funcionarios',
+        'funcionarios' : funcionarios
     }
-    return render(request, 'pages/listar/funcionario.html', var)
+    return render(request, 'pages/listar/funcionario.html', context)
 
 #@login_required
 def cargo(request):
-    var = {
-        'titulo_pag': 'Visualização Cargos'
+    cargos = Cargos.objects.all()
+    print(f"\n\n{cargos}\n\n")
+    
+    context = {
+        'cargos': cargos,
+        'title' : 'Visualizar Cargos'
     }
-    return render(request, 'pages/listar/cargo.html', var)
+    
+    return render(request, 'pages/listar/cargo.html', context)
 
 def recrutamento(request):
     var = {
@@ -89,13 +104,12 @@ def candidatos(request):
 
 def cadfuncionario(request):
     
-    estado_civil = ['Solteiro(a)','Casado(a)','Divorciado(a)','Viuvo(a)']
     categorias_cnh = categoriasCNH()
 
     var = {
         'titulo_pag': 'Cadastro Funcionario',
         'categoria_cnh' : categorias_cnh,
-        'estados_civis' : estado_civil
+        'estados_civis' : estado_civil()
     }
     return render(request, 'pages/cadastro/funcionario.html', var)
 
@@ -111,11 +125,9 @@ def cadrecrutamento(request):
 
 def cadcandidato(request):
     
-    list_uf = ufs()
-    
     context = {
         'title' : 'Cadastro de Candidato',
-        'ufs' : list_uf
+        'ufs' : ufs(),
     }
 
     return render(request, 'pages/cadastro/candidato.html', context)
@@ -124,22 +136,19 @@ def cadcandidato(request):
 # VIEWS PARA EDIÇÃO
 
 
-def editcandidato(request, id_usuario):
+def editcandidato(request, id_candidato):
     print("\n\n"+request.method+"\n\n")
 
-    candidatos = Candidato.objects.get(pk=id_usuario)
+    candidatos = Candidato.objects.get(pk=id_candidato)
     candidatos.data_nascimento = datetime.strftime(candidatos.data_nascimento, '%Y-%m-%d')
     form = EditarCandidato(request.POST, instance=candidatos)
-    lista_uf = ufs()
-
     context = {
+        'ufs' : ufs(),
         'candidato' : candidatos,
-        'ufs' : lista_uf,
         'form' : form
     }
 
     if form.is_valid():
-        print("\n\nSalvo Savo Salvo\n\n")
         form.save()
         return HttpResponseRedirect('/candidatos')
     else:
@@ -148,21 +157,43 @@ def editcandidato(request, id_usuario):
     return render(request, 'pages/editar/candidato.html', context)
 
 
+def editcargo(request, id_cargo):
+    
+    cargos = Cargos.objects.get(pk=id_cargo)
+    form = EditarCargo(request.POST, instance=cargos)
+    
+    print(cargos)
+    context = {
+        'departamentos' : departamentos(),
+        'title' : 'Editar Cargo',
+        'cargo' : cargos
+    }
 
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/cargos')
+    else:
+        print(form.errors)
+    
+    return render(request,'pages/editar/cargo.html', context)
 
-    #if request.method == 'GET':
-    #    
-    #
-    #if request.method == 'POST':
-#
-#
-    #    if form.is_valid():
-    #        candidato = Candidato.objects.get(pk=id_usuario)
-    #        candidato.nome_completo = form.cleaned_data['nome_completo']
-    #        candidato.data_nascimento = form.cleaned_data['data_nascimento']
-    #        candidato.contato = form.cleaned_data['contato']
-    #        candidato.endereco_rua = form.cleaned_data['endereco_rua']
-    #        candidato.endereco_numero = form.cleaned_data['endereco_numero']
-    #        candidato.endereco_cidade = form.cleaned_data['endereco_cidade']
-    #        candidato.endereco_estado = form.cleaned_data['endereco_estado']
-    #        candidato.save()
+def editfuncionario(request, id_funcionario):
+    
+    funcionarios = Funcionario.objects.get(pk=id_funcionario)
+    form = EditarFuncionario(request.POST, instance=funcionarios)
+    
+    print(funcionario)
+    
+    context = {
+        'title' : 'Editar Funcionário',
+        'funcionarios' : funcionarios,
+        'estado_civil' : estado_civil(),
+        'categorias' : categoriasCNH(),
+    }
+    
+    if form.is_valid():
+        form.save()
+    else:
+        print(form.errors)
+        
+    return render(request, 'pages/editar/funcionario.html')

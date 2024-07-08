@@ -1,7 +1,8 @@
+{% load static %}
 {% include "partials/menu.html" %}
 
 <h1 style="color: #fff; font-weight:bold">
-    <center>Cargo</center>
+    <center>{{ title }}</center>
 </h1>
 <table class="listagem_tabela">
     <thead>
@@ -12,23 +13,26 @@
             <th scope="col">Departamento</th>
             <th scope="col">Salário Base</th>
             <th scope="col">Requisito de Formação</th>
+            <th scope="col"></th>
+            
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row"> 1 </th>
-            <th> Suporte </th>
-            <th> Suporte e treinamento do uso de software ao cliente </th>
-            <th> TI </th>
-            <th>R$ 2.500</th>
-        </tr>
-        <tr>
-            <th scope="row"> 2 </th>
-            <th> Limpeza </th>
-            <th> Resposável pela limpeza da empresa </th>
-            <th> Limpeza </th>
-            <th>R$ 1.500</th>
-        </tr>
+        {% for cargo in cargos %}
+            <tr>
+                <th scope="row"> {{ cargo.id }} </th>
+                <th> {{ cargo.cargo }} </th>
+                <th> {{ cargo.descricao }}</th>
+                <th> {{ cargo.departamento }} </th>
+                <th> R$ {{ cargo.salario_base }} </th>
+                <th> {{ cargo.requisito_formacao}} </th>
+                <th> 
+                    <center>
+                        <a href="{% url "editcargo" cargo.id %}"><img src="{% static "img/editar.png" %}" width="20px"></a>
+                    </center>    
+                </th>    
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 <div class="button_novocargo">
