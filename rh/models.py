@@ -4,14 +4,14 @@ from django.db import models
 class Funcionario(models.Model):
     nome_completo = models.CharField(max_length=100)
     idade = models.IntegerField()
-    data_nasicimento = models.DateField()
+    data_nascimento = models.DateField()
     cpf = models.CharField(max_length=14)
     estado_civil = models.CharField(max_length=100)
-    categoria = models.CharField(max_length=100)
+    cnh = models.CharField(max_length=100)
 
 
     def __str__(self):
-        return f'idade: {self.idade} | data: {self.data}'
+        return f'idade: {self.idade} | data: {self.data_nascimento}'
 
 
 class Cargos(models.Model):
@@ -38,7 +38,7 @@ class Candidato(models.Model):
 
     def __str__(self):
         return f'nome_completo: {self.nome_completo} | contato: {self.contato}'
-   
+
 class Recrutamento(models.Model):
     nome_candidato = models.CharField(max_length=100)
     cargo = models.CharField(max_length=100)

@@ -2,7 +2,7 @@
 {% include "partials/menu.html" %}
 
 <h1 style="color: #fff; font-weight:bold">
-    <center>Funcionário</center>
+    <center>{{ title }}</center>
     <br><br>
 </h1>
 <table class="listagem_tabela">
@@ -15,38 +15,26 @@
             <th scope="col">CPF</th>
             <th scope="col">Estado Civil</th>
             <th scope="col">Categoria (CNH)</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            {% for funcionario in funcionarios %}{% endfor %}
-            <th scope="row"> {{funcionario.id}}</th>
-            <th> {{ funcionario.nome_completo }} </th>
-            <th> {{ funcionario.idade}} </th>
-            <th> {{ funcionario.data_nascimento }} </th>
-            <th> {{ funcionario.cpf }}</th>
-            <th> {{ funcionario.estado_civil }}</th>
-            <th> {{ funcionario.categoria }}</th>
-            <th>
-                <center>
-                    <a href="{% url "editfuncionario" funcionario.id %}"><img src="{% static "img/editar.png" %}"/></a>
-                </center>
-            </th>
-        </tr>
-        <tr>
-            <th scope="row"> 2 </th>
-            <th> Leandro </th>
-            <th> 23 </th>
-            <th> 15/09/2000 </th>
-            <th>154.697.845-20</th>
-        </tr>
-        <tr>
-        <th scope="row">3</th>
-            <th>Larry</td>
-            <th>31</th>
-            <th>14/04/1993</th>
-            <th>154.295.865-20</th>
-        </tr>
+        {% for funcionario in funcionarios %}
+            <tr>
+                <th scope="row"> {{funcionario.id}}</th>
+                <th> {{ funcionario.nome_completo }} </th>
+                <th> {{ funcionario.idade}} </th>
+                <th> {{ funcionario.data_nascimento }} </th>
+                <th> {{ funcionario.cpf }}</th>
+                <th> {{ funcionario.estado_civil }}</th>
+                <th> {{ funcionario.cnh }}</th>
+                <th>
+                    <center>
+                        <a href="{% url "editfuncionario" funcionario.id%}"><img src="{% static "img/editar.png" %}" width="20px" scrset=""></a>
+                    </center>
+                </th>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 <div class="button_novofuncionario">

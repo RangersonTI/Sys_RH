@@ -17,7 +17,7 @@ def ufs():
     return ['','AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']
 
 def categoriasCNH():
-    return ['Não há','A','B','C','D','E','A e B','A e C','A e D','A e E']
+    return ['nao_ha','A','B','C','D','E','A e B','A e C','A e D','A e E']
 
 def departamentos():
     return ['','TI','Administrativo','Recursos Humanos (RH)','Market','Financeiro']
@@ -59,7 +59,12 @@ def login(request):
 def funcionario(request):
 
     funcionarios = Funcionario.objects.all()
-    print(f"\n\n{funcionarios}\n\n")
+    
+    
+    #for funcionario in funcionarios:
+    #    funcionario.data_nasicimento = datetime.strftime(funcionario.data_nasicimento, '%Y-%m-%d')
+        
+    print(f"\n\n{funcionario}\n\n")
 
     context = {
         'title': 'Vizualizar Funcionarios',
@@ -139,12 +144,12 @@ def cadcandidato(request):
 def editcandidato(request, id_candidato):
     print("\n\n"+request.method+"\n\n")
 
-    candidatos = Candidato.objects.get(pk=id_candidato)
-    candidatos.data_nascimento = datetime.strftime(candidatos.data_nascimento, '%Y-%m-%d')
-    form = EditarCandidato(request.POST, instance=candidatos)
+    candidato = Candidato.objects.get(pk=id_candidato)
+    candidato.data_nascimento = datetime.strftime(candidatos.data_nascimento, '%Y-%m-%d')
+    form = EditarCandidato(request.POST, instance=candidato)
     context = {
         'ufs' : ufs(),
-        'candidato' : candidatos,
+        'candidato' : candidato,
         'form' : form
     }
 
@@ -158,7 +163,7 @@ def editcandidato(request, id_candidato):
 
 
 def editcargo(request, id_cargo):
-    
+
     cargos = Cargos.objects.get(pk=id_cargo)
     form = EditarCargo(request.POST, instance=cargos)
     
@@ -179,21 +184,22 @@ def editcargo(request, id_cargo):
 
 def editfuncionario(request, id_funcionario):
     
-    funcionarios = Funcionario.objects.get(pk=id_funcionario)
-    form = EditarFuncionario(request.POST, instance=funcionarios)
+    funcionario = Funcionario.objects.get(pk=id_funcionario)
+    form = EditarFuncionario(request.POST, instance=funcionario)
     
     print(funcionario)
     
     context = {
         'title' : 'Editar Funcionário',
-        'funcionarios' : funcionarios,
-        'estado_civil' : estado_civil(),
+        'funcionarios' : funcionario,
+        'estados_civis' : estado_civil(),
         'categorias' : categoriasCNH(),
     }
     
     if form.is_valid():
         form.save()
+        return HttpResponseRedirect('/funcionarios')
     else:
         print(form.errors)
         
-    return render(request, 'pages/editar/funcionario.html')
+    return render(request, 'pages/editar/funcionario.html', context)
