@@ -17,13 +17,13 @@ def ufs():
     return ['','AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO']
 
 def categoriasCNH():
-    return ['nao_ha','A','B','C','D','E','A e B','A e C','A e D','A e E']
+    return ['','Não Há','A','B','C','D','E','A e B','A e C','A e D','A e E']
 
 def departamentos():
     return ['','TI','Administrativo','Recursos Humanos (RH)','Market','Financeiro']
 
 def estado_civil():
-    return ['Solteiro(a)','Casado(a)','Divorciado(a)','Viuvo(a)']
+    return ['','Solteiro(a)','Casado(a)','Divorciado(a)','Viuvo(a)']
 # VIEWS DE LISTAGEM / LOGIN / HOME
 
 def home(request):
@@ -145,9 +145,13 @@ def editcandidato(request, id_candidato):
     print("\n\n"+request.method+"\n\n")
 
     candidato = Candidato.objects.get(pk=id_candidato)
-    candidato.data_nascimento = datetime.strftime(candidatos.data_nascimento, '%Y-%m-%d')
+    
+    if candidato.data_nascimento is not None:
+        candidato.data_nascimento = datetime.strftime(candidato.data_nascimento, '%Y-%m-%d')
+        
     form = EditarCandidato(request.POST, instance=candidato)
     context = {
+        'title' : 'Editar Candidato',
         'ufs' : ufs(),
         'candidato' : candidato,
         'form' : form
@@ -187,8 +191,9 @@ def editfuncionario(request, id_funcionario):
     funcionario = Funcionario.objects.get(pk=id_funcionario)
     form = EditarFuncionario(request.POST, instance=funcionario)
     
-    print(funcionario)
-    
+    if funcionario.data_nascimento is not None:
+        funcionario.data_nascimento = datetime.strftime(funcionario.data_nascimento, '%Y-%m-%d')
+        
     context = {
         'title' : 'Editar Funcionário',
         'funcionarios' : funcionario,
@@ -201,5 +206,5 @@ def editfuncionario(request, id_funcionario):
         return HttpResponseRedirect('/funcionarios')
     else:
         print(form.errors)
-        
+    
     return render(request, 'pages/editar/funcionario.html', context)

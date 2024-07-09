@@ -3,7 +3,7 @@
 <div class="form_container">
     <center>
         <h1 style="color: #fff; font-weight:bold">
-            {{ title }}({{ cargo.id}})
+            {{ title }}
         </h1>
         <form method="POST">
             {% csrf_token %}
@@ -12,7 +12,7 @@
             <label for="descricao">Descrição:</label>
             <input type="text" name="descricao" id="descricao" value="{{ cargo.descricao}}" requerid/>
             <label for="departamento">Departamento</label>
-            <select name="departamento" id="departamento" requerid/>
+            <select name="departamento" id="departamento" requerid>
                 {% for departamento in departamentos %}
                     <option value="{{ departamento }}">{{ departamento }}</option>
                 {% endfor %}
