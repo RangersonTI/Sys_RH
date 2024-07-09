@@ -1,3 +1,4 @@
+{% load static %}
 {% include "partials/menu.html" %}
 
 <h1 style="color: #fff; font-weight:bold">
@@ -12,25 +13,23 @@
             <th scope="col">Escolaridade</th>
             <th scope="col">Habilidade Técnicas</th>
             <th scope="col">Experiências</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row"> 1 </th>
-            <th> Leticia </th>
-            <th> Suporte </th>
-            <th> Ensino Médio Completo </th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <th scope="row"> 2 </th>
-            <th> Marcos </th>
-            <th> Limpeza </th>
-            <th> Ensino Médio Completo </th>
-            <th></th>
-            <th></th>
-        </tr>
+        {% for recrutamento in recrutamentos %}
+            <tr>
+                <th scope="row"> {{ recrutamento.id }} </th>
+                <th> {{ recrutamento.nome_candidato}} </th>
+                <th> {{ recrutamento.cargo }} </th>
+                <th> {{ recrutamento.escolaridade }} </th>
+                <th> {{ recrutamento.habilidades_tecnicas }}</th>
+                <th> {{ recrutamento.experiencia_profissionais }}</th>
+                <th>
+                    <a href="{% url "editrecrutamento" recrutamento.id%}"><img src="{% static "img/editar.png" %}" width="20px"></a>    
+                <th>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 <div class="button_novo_recrutamento">

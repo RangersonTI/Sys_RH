@@ -85,10 +85,14 @@ def cargo(request):
     return render(request, 'pages/listar/cargo.html', context)
 
 def recrutamento(request):
-    var = {
-        'titulo_pag': 'Recrutamento'
+    recrutamentos = Recrutamento.objects.all()
+    
+    context = {
+        'title': 'Visualizar Recrutamento',
+        'recrutamentos' : recrutamentos
     }
-    return render(request, 'pages/listar/recrutamento.html')
+    
+    return render(request, 'pages/listar/recrutamento.html',context)
 
 #@login_required
 def candidatos(request):
@@ -208,3 +212,28 @@ def editfuncionario(request, id_funcionario):
         print(form.errors)
     
     return render(request, 'pages/editar/funcionario.html', context)
+
+def editrecrutamento(request, id_recrutamento):
+    recrutamento = Recrutamento.objects.get(pk=id_recrutamento)
+    candidato = Candidato.objects.all()
+    cargo = Cargos.objects.all()
+    
+    form = EditarRecrutamento(request.POST, instance=recrutamento)
+    
+    context = {
+        'title' : 'Editar Recrutamento',
+        'recrutamento' : recrutamento,
+        'candidato_recrutado' : candidato,
+        'cargo_recrutado' : cargo,
+        'escolaridade' : ['Ensino Médio Completo','Ensino Superior']
+    }
+    
+    print(candidato)
+    
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/recrutamento')
+    else:
+        print(form.errors)
+
+    return render(request, 'pages/editar/recrutamento.html', context)

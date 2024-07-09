@@ -40,5 +40,5 @@ urlpatterns = [
     path('edit_cargo/<int:id_cargo>', view_rh.editcargo, name='editcargo'),
     path('edit_candidato/<int:id_candidato>',view_rh.editcandidato,name='editcandidato'),
     path('edit_funcionario/<int:id_funcionario>', view_rh.editfuncionario, name='editfuncionario'),
-    path('edit_recrutamento/',view_rh.cadrecrutamento,name='editrecrutamento')
+    path('edit_recrutamento/<int:id_recrutamento>',view_rh.editrecrutamento,name='editrecrutamento')
 ]
