@@ -16,7 +16,7 @@ class Funcionario(models.Model):
 
 class Cargos(models.Model):
     cargo = models.CharField(max_length=100)
-    descricao = models.CharField(max_length=100)
+    descricao = models.CharField(max_length=500)
     departamento = models.CharField(max_length=100)
     salario_base = models.DecimalField(max_digits=10, decimal_places=2)
     requisito_formacao = models.CharField(max_length=100)
