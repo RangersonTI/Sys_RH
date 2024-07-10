@@ -11,23 +11,37 @@
             {% csrf_token %}
             <label for="nome_completo">Nome Completo:</label>
             <input type="text" name="nome_completo" id="nome_completo" value="{{ candidato.nome_completo }}" requerid/>
+
             <label for="data_nascimento">Data de Nascimento:</label>
             <input type="date" name="data_nascimento" id="data_nascimento" value="{{ candidato.data_nascimento }}" requerid/>
+
+            <label for="escolaridade">Escolaridade:</label>
+            <select name="escolaridade" id="escolaridade" required>
+                {% for escolaridade in escolaridades %}
+                    <option value="{{ escolaridade }}">{{ escolaridade }}</option>
+                {% endfor %}
+            </select>
+
             <label for="contato">Contato:</label>
             <input type="text" name="contato" id="contato" value="{{ candidato.contato }}" requerid/>
+
             <label>Endereço:</label><label></label>
             <label for="endereco_rua">Rua:</label>
             <input type="text" name="endereco_rua" id="endereco_rua" value="{{ candidato.endereco_rua }}" requerid/>
+
             <label for="endereco_numero">Numero:</label>
             <input type="text" name="endereco_numero" id="endereco_numero" value="{{ candidato.endereco_numero }}" requerid/>
+
             <label for="endereco_cidade">Cidade:</label>
             <input type="text" name="endereco_cidade" id="endereco_cidade" value="{{ candidato.endereco_cidade }}" requerid/>
+
             <label for="endereco_estado">Estado:</label>
             <select name="endereco_estado" id="endereco_estado" required>
                 {% for uf in ufs %}
                     <option value="{{ uf }}">{{ uf }}</option>
                 {% endfor %}
             </select>
+
             <br><br>
             <button id="input_cad_candidato" type="submit">Enviar</button>
         </form>

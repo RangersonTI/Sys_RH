@@ -10,7 +10,6 @@
             <th scope="col">ID</th>
             <th scope="col">Candidato</th>
             <th scope="col">Cargo</th>
-            <th scope="col">Escolaridade</th>
             <th scope="col">Habilidade Técnicas</th>
             <th scope="col">Experiências</th>
             <th></th>
@@ -22,11 +21,10 @@
                 <th scope="row"> {{ recrutamento.id }} </th>
                 <th> {{ recrutamento.nome_candidato}} </th>
                 <th> {{ recrutamento.cargo }} </th>
-                <th> {{ recrutamento.escolaridade }} </th>
                 <th> {{ recrutamento.habilidades_tecnicas }}</th>
-                <th> {{ recrutamento.experiencia_profissionais }}</th>
+                <th> {{ recrutamento.experiencia_profissional }}</th>
                 <th>
-                    <a href="{% url "editrecrutamento" recrutamento.id%}"><img src="{% static "img/editar.png" %}" width="20px"></a>    
+                    <a href="{% url "editrecrutamento" recrutamento.id%}"><img src="{% static "img/editar.png" %}" width="20px" scrset=""></a>    
                 <th>
             </tr>
         {% endfor %}

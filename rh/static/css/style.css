@@ -40,6 +40,10 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+textarea{
+    resize: none;
+}
+
 .hero {
     color: #ffffff;
     text-align: center;
@@ -406,10 +410,6 @@ nav ul li a {
             padding: 8px;
             font-size: 16px;
             border-radius: 5px;
-        }
-
-        textarea{
-            resize: none;
         }
 
 /* pages/cadastro/candidato.html */

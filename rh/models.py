@@ -28,6 +28,7 @@ class Cargos(models.Model):
 class Candidato(models.Model):
     nome_completo = models.CharField(max_length=100)
     data_nascimento = models.DateField()
+    escolaridade = models.CharField(max_length=100)
     contato = models.CharField(max_length=100)
     endereco_rua = models.CharField(max_length=100)
     endereco_numero = models.CharField(max_length=5)
@@ -42,7 +43,6 @@ class Candidato(models.Model):
 class Recrutamento(models.Model):
     nome_candidato = models.CharField(max_length=100)
     cargo = models.CharField(max_length=100)
-    escolaridade = models.CharField(max_length=100)
     habilidades_tecnicas = models.CharField(max_length=100)
     experiencia_profissional = models.CharField(max_length=100)
 

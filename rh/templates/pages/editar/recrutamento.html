@@ -3,7 +3,7 @@
 <div class="form_container">
     <center>
         <h1>
-            Cadastro de Recrutamento
+            {{ title }}
             <br><br>
         </h1>
 
@@ -11,29 +11,20 @@
             {% csrf_token %}
             <label for="nome_candidato">Candidato:</label>
             <select name="nome_candidato" id="nome_candidato">
-                <option value=""></option>
                 {% for candidato in candidato_recrutado %}
-                    <option value="{{ candidato.nome_candidato }}">{{ candidato.nome_candidato }}</option>
+                    <option value="{{ candidato }}">{{ candidato }}</option>
                 {% endfor %}
             </select>
             <label for="cargo_escolhido">Cargo:</label>
             <select name="cargo" id="cargo">
-                <option value=""></option>
                 {% for cargo in cargo_recrutado %}
-                    <option value="{{ cargo.cargo }}"> {{ cargo.cargo }} </option>
-                {% endfor %}
-            </select>
-            <label for="escolaridade">Escolaridade:</label>
-            <select name="escolaridade" id="escolaridade">
-                <option value=""></option>
-                {% for escolaridade in escolaridade %}
-                    <option value="{{ escolaridade }}">{{ escolaridade }}</option>
+                    <option value="{{ cargo }}"> {{ cargo }} </option>
                 {% endfor %}
             </select>
             <label for="habilidades">Habilidades técnicas:</label>
-            <textarea type="text" name="habilidades_tecnicas" id="habilidades_tecnicas"></textarea>
+            <textarea type="text" name="habilidades_tecnicas" id="habilidades_tecnicas">{{ recrutamento.habilidades_tecnicas }}</textarea>
             <label for="experiencias_pro">Experiências Profissionais:</label>
-            <textarea type="text" name="experiencia_profissional" id="experiencia_profissional"></textarea>
+            <textarea type="text" name="experiencia_profissional" id="experiencia_profissional">{{ recrutamento.experiencia_profissional }}</textarea>
             <br><br>
             <button id="input_cad_recrutamento" type="submit">Enviar</button>
         </form>

@@ -10,7 +10,7 @@
             <label for="cargo">Cargo:</label>
             <input type="text" name="cargo" id="cargo" value="{{ cargo.cargo }}" requerid/>
             <label for="descricao">Descrição:</label>
-            <input type="text" name="descricao" id="descricao" value="{{ cargo.descricao}}" requerid/>
+            <textarea type="text" name="descricao" id="daescricao">{{ cargo.descricao }}</textarea requerid>
             <label for="departamento">Departamento</label>
             <select name="departamento" id="departamento" requerid>
                 {% for departamento in departamentos %}
