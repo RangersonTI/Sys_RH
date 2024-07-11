@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, reverse_lazy
 from django.views.generic.edit import UpdateView
 from .models import Candidato, Funcionario, Cargos, Recrutamento
+from .forms import FuncionarioForm,CargoForm, RecrutamentoForm, CandidatoForm
 from .forms import EditarCandidato, EditarCargo, EditarRecrutamento, EditarFuncionario
 from django.http import HttpResponseRedirect
 from datetime import datetime
@@ -108,33 +109,70 @@ def candidatos(request):
 
 # VIEWS PARA CADASTROS
 
-
 def cadfuncionario(request):
-    
+    if request.method == 'POST':
+        form = FuncionarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cad_funcionario')  # redireciona para uma página de sucesso ou a página desejada
+    else:
+        form = FuncionarioForm()
+
     categorias_cnh = categoriasCNH()
+    estados_civis = estado_civil()
 
     var = {
         'titulo_pag': 'Cadastro Funcionario',
         'categoria_cnh' : categorias_cnh,
-        'estados_civis' : estado_civil()
+        'estados_civis' : estados_civis,
+        'form': form,
     }
     return render(request, 'pages/cadastro/funcionario.html', var)
 
+
 def cadcargo(request):
+    if request.method == 'POST':
+        form = CargoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cad_cargo')  # redireciona para uma página de sucesso ou a página desejada
+    else:
+        form = CargoForm()
+
     var = {
-        'titulo_pag': 'Cadastro Funcionario'
+        'titulo_pag': 'Cadastro Funcionario',
+        'form': form,
     }
     return render(request, 'pages/cadastro/cargo.html', var)
 
 def cadrecrutamento(request):
-    
-    return render(request, 'pages/cadastro/recrutamento.html')
+    if request.method == 'POST':
+        form = RecrutamentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cad_recrutamento')  # redireciona para uma página de sucesso ou a página desejada
+    else:
+        form = RecrutamentoForm()
+
+    context = {
+        'titulo_pag': 'Cadastro Recrutamento',
+        'form': form,
+    }
+    return render(request, 'pages/cadastro/recrutamento.html', context)
 
 def cadcandidato(request):
-    
+    if request.method == 'POST':
+        form = CandidatoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cad_candidato')  # redireciona para uma página de sucesso ou a página desejada
+    else:
+        form = CandidatoForm()
+
     context = {
-        'title' : 'Cadastro de Candidato',
-        'ufs' : ufs(),
+        'title': 'Cadastro de Candidato',
+        'ufs': ufs(),
+        'form': form,
     }
 
     return render(request, 'pages/cadastro/candidato.html', context)
