@@ -5,7 +5,7 @@ from django.views.generic.edit import UpdateView
 from .models import Candidato, Funcionario, Cargos, Recrutamento
 from .forms import FuncionarioForm,CargoForm, RecrutamentoForm, CandidatoForm
 from .forms import EditarCandidato, EditarCargo, EditarRecrutamento, EditarFuncionario
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 
 # Create your views here.
@@ -58,8 +58,6 @@ def login(request):
 
     return render(request, 'pages/login.html', var)
 
-#@login_required
-
 
 def funcionario(request):
 
@@ -71,7 +69,7 @@ def funcionario(request):
     }
     return render(request, 'pages/listar/funcionario.html', context)
 
-#@login_required
+
 def cargo(request):
     cargos = Cargos.objects.all()
     print(f"\n\n{cargos}\n\n")
@@ -83,6 +81,7 @@ def cargo(request):
     
     return render(request, 'pages/listar/cargo.html', context)
 
+
 def recrutamento(request):
     recrutamentos = Recrutamento.objects.all()
     
@@ -93,7 +92,7 @@ def recrutamento(request):
     
     return render(request, 'pages/listar/recrutamento.html',context)
 
-#@login_required
+
 def candidatos(request):
     
     candidatos = Candidato.objects.all()
@@ -111,12 +110,22 @@ def candidatos(request):
 
 def cadfuncionario(request):
     if request.method == 'POST':
-        form = FuncionarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('cad_funcionario')  # redireciona para uma página de sucesso ou a página desejada
-    else:
-        form = FuncionarioForm()
+        nome_func = request.POST.get('nome_completo')
+        idade_func = request.POST.get('idade')
+        nascimento_func = request.POST.get('data_nascimento')
+        cpf_func = request.POST.get('cpf')
+        estado_civil_func = request.POST.get('estado_civil')
+        cnh_func = request.POST.get('categoria_cnh')
+
+        if nome_func is None:
+            return HttpResponse("Nome inválido")
+
+        if nascimento_func is None:
+            return HttpResponse("Data inválido")
+
+        funcionario = Funcionario(nome_completo = nome_func, idade=idade_func, data_nascimento = nascimento_func,cpf=cpf_func, estado_civil = estado_civil_func,cnh = cnh_func)
+        funcionario.save()
+        return HttpResponseRedirect('/funcionarios')
 
     categorias_cnh = categoriasCNH()
     estados_civis = estado_civil()
@@ -125,7 +134,6 @@ def cadfuncionario(request):
         'titulo_pag': 'Cadastro Funcionario',
         'categoria_cnh' : categorias_cnh,
         'estados_civis' : estados_civis,
-        'form': form,
     }
     return render(request, 'pages/cadastro/funcionario.html', var)
 
@@ -141,11 +149,15 @@ def cadcargo(request):
 
     var = {
         'titulo_pag': 'Cadastro Funcionario',
+        'departamentos' : departamentos(),
         'form': form,
     }
     return render(request, 'pages/cadastro/cargo.html', var)
 
 def cadrecrutamento(request):
+    cargos = Cargos.objects.all()
+    candidatos = Candidato.objects.all()
+    
     if request.method == 'POST':
         form = RecrutamentoForm(request.POST)
         if form.is_valid():
@@ -156,8 +168,12 @@ def cadrecrutamento(request):
 
     context = {
         'titulo_pag': 'Cadastro Recrutamento',
+        'escolaridade' : escolaridades(),
+        'cargos' : cargos,
+        'candidatos' : candidatos,
         'form': form,
     }
+    
     return render(request, 'pages/cadastro/recrutamento.html', context)
 
 def cadcandidato(request):
@@ -338,3 +354,12 @@ def editrecrutamento(request, id_recrutamento):
         print(form.errors)
 
     return render(request, 'pages/editar/recrutamento.html', context)
+
+
+# VIEWS PARA EXCLUSÃO
+
+def deletrecrutamento(request, id_recrutamento):
+    
+    recrutamento = Recrutamento.objects.get(pk=id_recrutamento)
+    recrutamento.delete()
+    return HttpResponseRedirect('/recrutamento')

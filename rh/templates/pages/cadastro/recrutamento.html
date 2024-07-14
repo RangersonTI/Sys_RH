@@ -11,19 +11,22 @@
             {% csrf_token %}
             <label for="nome_candidato">Candidato:</label>
             <select name="nome_candidato" id="nome_candidato">
-                {% for nome in nome %}
-                    <option value="{{ nome }}">{{ nome }}</option>
+                <option value=""></option>
+                {% for candidato in candidatos %}
+                    <option value="{{ candidato.nome_completo }}">{{ candidato.nome_completo }}</option>
                 {% endfor %}
             </select>
             <label for="cargo_escolhido">Cargo:</label>
             <select name="cargo_escolhido" id="cargo_escolhido">
+                <option value=""></option>
                 {% for cargo in cargos %}
-                    <option value="{{ cargo }}"> {{ cargo }} </option>
+                    <option value="{{ cargo.cargo }}"> {{ cargo.cargo }} </option>
                 {% endfor %}
             </select>
             <label for="escolaridade">Escolaridade:</label>
             <select name="escolaridade" id="escolaridade">
-                {% for escolaridade in escolaridades %}
+                <option value=""></option>
+                {% for escolaridade in escolaridade %}
                     <option value="{{ escolaridade }}">{{ escolaridade }}</option>
                 {% endfor %}
             </select>
