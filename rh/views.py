@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, reverse_lazy
 from django.views.generic.edit import UpdateView
 from .models import Candidato, Funcionario, Cargos, Recrutamento
-from .forms import FuncionarioForm,CargoForm, RecrutamentoForm, CandidatoForm
 from .forms import EditarCandidato, EditarCargo, EditarRecrutamento, EditarFuncionario
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
@@ -140,17 +139,21 @@ def cadfuncionario(request):
 
 def cadcargo(request):
     if request.method == 'POST':
-        form = CargoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('cad_cargo')  # redireciona para uma página de sucesso ou a página desejada
-    else:
-        form = CargoForm()
+        cargo = request.POST.get('cargo')
+        descricao = request.POST.get('descricao')
+        departamento = request.POST.get('departamento')
+        salario_base = request.POST.get('salario_base')
+        requisito_formacao = request.POST.get('requisitos_formacao')
+        
+        print(requisito_formacao)
+
+        cargo = Cargos(cargo = cargo, descricao=descricao, departamento = departamento,salario_base=salario_base, requisito_formacao = requisito_formacao)
+        cargo.save()
+        return HttpResponseRedirect('/cargos')
 
     var = {
         'titulo_pag': 'Cadastro Funcionario',
         'departamentos' : departamentos(),
-        'form': form,
     }
     return render(request, 'pages/cadastro/cargo.html', var)
 
@@ -158,37 +161,35 @@ def cadrecrutamento(request):
     cargos = Cargos.objects.all()
     candidatos = Candidato.objects.all()
     
-    if request.method == 'POST':
-        form = RecrutamentoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('cad_recrutamento')  # redireciona para uma página de sucesso ou a página desejada
-    else:
-        form = RecrutamentoForm()
-
     context = {
         'titulo_pag': 'Cadastro Recrutamento',
         'escolaridade' : escolaridades(),
         'cargos' : cargos,
         'candidatos' : candidatos,
-        'form': form,
     }
     
     return render(request, 'pages/cadastro/recrutamento.html', context)
 
 def cadcandidato(request):
     if request.method == 'POST':
-        form = CandidatoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('cad_candidato')  # redireciona para uma página de sucesso ou a página desejada
-    else:
-        form = CandidatoForm()
+        nome_completo = request.POST.get('nome_completo')
+        data_nascimento = request.POST.get('data_nascimento')
+        escolaridade = request.POST.get('escolaridade')
+        contato = request.POST.get('contato')
+        endereco_rua = request.POST.get('endereco_rua')
+        endereco_numero = request.POST.get('endereco_numero')
+        endereco_cidade = request.POST.get('endereco_cidade')
+        endereco_estado = request.POST.get('endereco_estado')
+        
+
+        candidato = Candidato(nome_completo = nome_completo, data_nascimento=data_nascimento, escolaridade = escolaridade,contato=contato, endereco_rua = endereco_rua,endereco_numero = endereco_numero, endereco_cidade=endereco_cidade, endereco_estado=endereco_estado)
+        candidato.save()
+        return HttpResponseRedirect('/candidatos')
 
     context = {
         'title': 'Cadastro de Candidato',
         'ufs': ufs(),
-        'form': form,
+        'escolaridades' : escolaridades()
     }
 
     return render(request, 'pages/cadastro/candidato.html', context)

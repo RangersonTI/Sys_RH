@@ -15,6 +15,12 @@
             <input type="date" name="data_nascimento" id="data_nascimento">
             <label for="contato">Contato:</label>
             <input type="text" name="contato" id="contato">
+            <label for="escolaridade">Escolaridade:</label>
+            <select name="escolaridade" id="escolaridade" required>
+                {% for escolaridade in escolaridades %}
+                    <option value="{{ escolaridade }}">{{ escolaridade }}</option>
+                {% endfor %}
+            </select>
             <label>Endereço:</label><label></label>
             <label for="endereco_rua">Rua:</label>
             <input type="text" name="endereco_rua" id="endereco_rua">
@@ -23,7 +29,7 @@
             <label for="endereco_cidade">Cidade:</label>
             <input type="text" name="endereco_cidade" id="endereco_cidade">
             <label for="endereco_estado">Estado:</label>
-            <select name="select_endereco_estado" id="select_endereco_estado">
+            <select name="endereco_estado" id="endereco_estado">
                 {% for uf in ufs %}
                     <option value="{{ uf }}">{{ uf }}</option>
                 {% endfor %}

@@ -3,29 +3,6 @@ from django.db import models
 from .models import Candidato, Recrutamento, Funcionario, Cargos
 from django import forms
 
-class FuncionarioForm(forms.ModelForm):
-    class Meta:
-        model = Funcionario
-        fields = ["nome_completo", "idade", "data_nascimento", "cpf", "estado_civil", "cnh"]
-
-class CargoForm(forms.ModelForm):
-    class Meta:
-        model = Cargos
-        fields = ["cargo", "descricao", "departamento", "salario_base", "requisito_formacao"]
-
-class RecrutamentoForm(forms.ModelForm):
-    class Meta:
-        model = Recrutamento
-        fields = ["nome_candidato", "cargo", "habilidades_tecnicas", "experiencia_profissional"]
-
-
-class  CandidatoForm(forms.ModelForm):
-    class Meta:
-        model = Candidato
-        fields = ["nome_completo", "data_nascimento", "escolaridade", "contato", "endereco_rua", "endereco_numero","endereco_cidade","endereco_estado", "endereco_cep"]
-    
-
-
 class EditarCandidato(ModelForm):
     class Meta:
         model = Candidato
