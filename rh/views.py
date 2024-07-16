@@ -158,18 +158,31 @@ def cadcargo(request):
     return render(request, 'pages/cadastro/cargo.html', var)
 
 def cadrecrutamento(request):
-    cargos = Cargos.objects.all()
-    candidatos = Candidato.objects.all()
+    
+    if request.method == 'POST':
+        nome_candidato = request.POST.get('nome_candidato')
+        cargo = request.POST.get('cargo')
+        habilidades_tecnicas = request.POST.get('habilidades_tecnicas')
+        experiencia_profissional = request.POST.get('experiencia_profissional')
+        
+        recrutamento = Recrutamento(
+            nome_candidato=nome_candidato,
+            cargo=cargo,
+            habilidades_tecnicas=habilidades_tecnicas,
+            experiencia_profissional=experiencia_profissional
+        )
+        recrutamento.save()
+        return HttpResponseRedirect('/recrutamento')
+    
     
     context = {
         'titulo_pag': 'Cadastro Recrutamento',
-        'escolaridade' : escolaridades(),
-        'cargos' : cargos,
-        'candidatos' : candidatos,
+        'ufs': ufs(),
+        'escolaridade': escolaridades(),
     }
     
     return render(request, 'pages/cadastro/recrutamento.html', context)
-
+    
 def cadcandidato(request):
     if request.method == 'POST':
         nome_completo = request.POST.get('nome_completo')

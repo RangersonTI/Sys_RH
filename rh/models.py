@@ -40,12 +40,15 @@ class Candidato(models.Model):
     def __str__(self):
         return f'nome_completo: {self.nome_completo} | contato: {self.contato}'
 
-class Recrutamento(models.Model):
-    nome_candidato = models.CharField(max_length=100)
-    cargo = models.CharField(max_length=100)
-    habilidades_tecnicas = models.CharField(max_length=100)
-    experiencia_profissional = models.CharField(max_length=100)
 
+class Recrutamento(models.Model):
+    nome_candidato = models.CharField(max_length=255)
+    cargo = models.CharField(max_length=255)
+    habilidades_tecnicas = models.TextField()
+    experiencia_profissional = models.TextField()
 
     def __str__(self):
-        return f'nome_candidato: {self.nome_candidato} | cargo: {self.cargo}'
+        return self.nome_candidato
+
+
+
