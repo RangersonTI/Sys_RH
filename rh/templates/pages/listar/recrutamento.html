@@ -23,7 +23,7 @@
                 <th> {{ recrutamento.cargo }} </th>
                 <th> {{ recrutamento.habilidades_tecnicas }}</th>
                 <th> {{ recrutamento.experiencia_profissional }}</th>
-                <th> 
+                <th style="width: 80px;"> 
                     <a style="padding-left: 7px; padding-right: 7px" href="{% url "editrecrutamento" recrutamento.id%}"><img src="{% static "img/editar.png" %}" width="20px" scrset=""></a>
                     <a style="padding-left: 7px; padding-right: 7px" href="{% url "deletrecrutamento" recrutamento.id%}"><img onclick="return confirmar_exclusao({{ recrutamento.id }})"src="{% static "img/excluir.png" %}" width="20px" scrset=""></a>
                 <th>

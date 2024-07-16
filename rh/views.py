@@ -181,7 +181,6 @@ def cadrecrutamento(request):
         'titulo_pag': 'Cadastro Recrutamento',
         'cargos' : cargos,
         'candidatos' : candidatos,
-        'escolaridade': escolaridades(),
     }
     
     return render(request, 'pages/cadastro/recrutamento.html', context)

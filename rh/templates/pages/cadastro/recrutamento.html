@@ -23,13 +23,6 @@
                     <option value="{{ cargo.cargo }}"> {{ cargo.cargo }} </option>
                 {% endfor %}
             </select>
-            <label for="escolaridade">Escolaridade:</label>
-            <select name="escolaridade" id="escolaridade">
-                <option value=""></option>
-                {% for escolaridade in escolaridade %}
-                    <option value="{{ escolaridade }}">{{ escolaridade }}</option>
-                {% endfor %}
-            </select>
             <label for="habilidades">Habilidades técnicas:</label>
             <textarea type="text" name="habilidades_tecnicas" id="habilidades_tecnicas"></textarea>
             <label for="experiencias_pro">Experiências Profissionais:</label>
