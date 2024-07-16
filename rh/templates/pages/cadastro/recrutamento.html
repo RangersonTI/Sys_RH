@@ -17,7 +17,7 @@
                 {% endfor %}
             </select>
             <label for="cargo_escolhido">Cargo:</label>
-            <select name="cargo_escolhido" id="cargo_escolhido">
+            <select name="cargo" id="cargo">
                 <option value=""></option>
                 {% for cargo in cargos %}
                     <option value="{{ cargo.cargo }}"> {{ cargo.cargo }} </option>
@@ -31,9 +31,9 @@
                 {% endfor %}
             </select>
             <label for="habilidades">Habilidades técnicas:</label>
-            <textarea type="text" name="habilidades" id="habilidades"></textarea>
+            <textarea type="text" name="habilidades_tecnicas" id="habilidades_tecnicas"></textarea>
             <label for="experiencias_pro">Experiências Profissionais:</label>
-            <textarea type="text" name="experiencias_pro" id="experiencias_pro"></textarea>
+            <textarea type="text" name="experiencia_profissional" id="experiencia_profissional"></textarea>
             <br><br>
             <button id="input_cad_recrutamento" type="submit">Enviar</button>
         </form>

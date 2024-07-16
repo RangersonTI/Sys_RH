@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.urls import path, reverse_lazy
 from django.views.generic.edit import UpdateView
 from .models import Candidato, Funcionario, Cargos, Recrutamento
@@ -159,6 +158,9 @@ def cadcargo(request):
 
 def cadrecrutamento(request):
     
+    cargos = Cargos.objects.all()
+    candidatos = Candidato.objects.all()
+    
     if request.method == 'POST':
         nome_candidato = request.POST.get('nome_candidato')
         cargo = request.POST.get('cargo')
@@ -177,7 +179,8 @@ def cadrecrutamento(request):
     
     context = {
         'titulo_pag': 'Cadastro Recrutamento',
-        'ufs': ufs(),
+        'cargos' : cargos,
+        'candidatos' : candidatos,
         'escolaridade': escolaridades(),
     }
     
